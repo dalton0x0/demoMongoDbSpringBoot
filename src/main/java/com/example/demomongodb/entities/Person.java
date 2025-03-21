@@ -17,7 +17,7 @@ import java.util.List;
 public class Person {
     @Id
     private String id;
-    private String firstName;
-    private String lastName;
+    private String firstname;
+    private String lastname;
     private List<String> telephones;
 }

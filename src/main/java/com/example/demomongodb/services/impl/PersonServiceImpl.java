@@ -31,8 +31,8 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public Person addPerson(PersonRequestDto personDto) {
         var person = Person.builder()
-                .firstName(personDto.getFirstName())
-                .lastName(personDto.getLastName())
+                .firstname(personDto.getFirstName())
+                .lastname(personDto.getLastName())
                 .telephones(personDto.getTelephones())
                 .build();
         return personRepository.save(person);
