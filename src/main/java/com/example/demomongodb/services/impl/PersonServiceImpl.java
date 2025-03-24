@@ -6,7 +6,10 @@ import com.example.demomongodb.repositories.PersonRepository;
 import com.example.demomongodb.services.PersonService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,8 +27,9 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Optional<Person> getPersonById(String id) {
-        return personRepository.findById(id);
+    public ResponseEntity<Person> getPersonById(String id) {
+        Optional<Person> existingPerson = personRepository.findById(id);
+        return existingPerson.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @Override
@@ -48,9 +52,18 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person deletePerson(String id) {
+    public void deletePerson(String id) {
         Person existingPerson = personRepository.findById(id).get();
         personRepository.delete(existingPerson);
-        return existingPerson;
+    }
+
+    public Person update(String id, PersonRequestDto personDto) {
+        return personRepository.findById(id)
+                .map(person -> {
+                    person.setFirstname(personDto.getFirstName());
+                    person.setLastname(personDto.getLastName());
+                    person.setTelephones(personDto.getTelephones());
+                    return personRepository.save(person);
+                }).orElse(null);
     }
 }

@@ -4,10 +4,10 @@ import com.example.demomongodb.dtos.PersonRequestDto;
 import com.example.demomongodb.entities.Person;
 import com.example.demomongodb.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/person")
@@ -27,7 +27,7 @@ public class PersonController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Person> getPersonById(@PathVariable String id) {
+    public ResponseEntity<Person> getPersonById(@PathVariable String id) {
         return personService.getPersonById(id);
     }
 
