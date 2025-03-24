@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "person")
+@Document(collection = "persons")
 @Builder
 public class Person {
     @Id
