@@ -10,4 +10,6 @@ public interface PersonService {
     List<Person> getAllPersons();
     Optional<Person> getPersonById(String id);
     Person addPerson(PersonRequestDto personDto);
+    Person updatePerson(String id,PersonRequestDto personDto);
+    Person deletePerson(String id);
 }

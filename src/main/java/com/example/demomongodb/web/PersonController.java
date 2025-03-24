@@ -35,4 +35,14 @@ public class PersonController {
     public Person addPerson(@RequestBody PersonRequestDto personDto) {
         return personService.addPerson(personDto);
     }
+
+    @PutMapping("/update/{id}")
+    public Person updatePerson(@PathVariable String id, @RequestBody PersonRequestDto personDto) {
+        return personService.updatePerson(id, personDto);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deletePerson(@PathVariable String id) {
+        personService.deletePerson(id);
+    }
 }
